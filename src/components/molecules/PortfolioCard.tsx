@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
 import { animationVariants } from '@/lib/animation';
 import type { PortfolioItem } from '@/types/portfolio';
 
@@ -8,6 +9,10 @@ interface PortfolioCardProps {
 }
 
 export function PortfolioCard({ project, onHoverVideo = true }: PortfolioCardProps) {
+  const [hovered, setHovered] = useState(false);
+
+  const videoPoster = useMemo(() => project.thumbnail, [project.thumbnail]);
+
   return (
     <motion.article
       initial="hidden"
@@ -16,13 +21,30 @@ export function PortfolioCard({ project, onHoverVideo = true }: PortfolioCardPro
       variants={animationVariants.fadeIn}
       className="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 shadow-card transition hover:-translate-y-1 hover:border-primary/30"
     >
-      <div className="relative overflow-hidden">
+      <div
+        className="relative overflow-hidden"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <img
           src={project.thumbnail}
           alt={project.title}
           className="h-80 w-full object-cover transition duration-500 group-hover:scale-105"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
+
+        {onHoverVideo && hovered ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src={project.videoUrl}
+            poster={videoPoster}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : null}
+
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
         <div className="absolute left-6 bottom-6 right-6 text-white">
           <p className="text-xs uppercase tracking-[0.35em] text-slate-400">{project.category}</p>
           <h3 className="mt-3 text-2xl font-semibold">{project.title}</h3>
