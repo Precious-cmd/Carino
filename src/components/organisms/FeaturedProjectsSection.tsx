@@ -1,10 +1,16 @@
+import { useMemo } from 'react';
 import { Container } from '@/components/atoms/Container';
 import { Section } from '@/components/atoms/Section';
 import { AnimatedHeading } from '@/components/atoms/AnimatedHeading';
 import { FeaturedProjectCard } from '@/components/molecules/FeaturedProjectCard';
-import { featuredProjects } from '@/data/featuredProjects';
+import { portfolioItems } from '@/data/portfolio';
 
 export function FeaturedProjectsSection() {
+  const featuredProjects = useMemo(
+    () => portfolioItems.filter((project) => project.featured),
+    []
+  );
+
   return (
     <Section id="featured-projects" className="bg-background">
       <Container>

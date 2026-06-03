@@ -10,6 +10,7 @@ import { WorkflowSection } from '@/components/organisms/WorkflowSection';
 import { WhyChooseSection } from '@/components/organisms/WhyChooseSection';
 import { TestimonialsSection } from '@/components/organisms/TestimonialsSection';
 import { FaqSection } from '@/components/organisms/FaqSection';
+import { ContactSection } from '@/components/organisms/ContactSection';
 
 export function HomePageTemplate() {
   return (
@@ -35,9 +36,7 @@ export function HomePageTemplate() {
 
         <FaqSection />
 
-        <Container>
-          <SectionPlaceholder name="Contact" description="Contact section architecture for email, WhatsApp, socials, and inquiry form." />
-        </Container>
+        <ContactSection />
       </main>
 
       <Footer />

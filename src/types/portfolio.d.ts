@@ -1,11 +1,4 @@
-export type PortfolioCategory =
-  | 'Product Ads'
-  | 'UGC Videos'
-  | 'Meta Ads'
-  | 'AI Commercials'
-  | 'Animated Videos'
-  | 'Course Videos'
-  | 'YouTube Content';
+export type PortfolioCategory = string;
 
 export interface PortfolioItem {
   id: string;
@@ -19,4 +12,10 @@ export interface PortfolioItem {
   projectType: string;
   featured: boolean;
   year: number;
+  summary?: string;
+  goal?: string;
+  process?: string;
+  aiTools?: string[];
+  editingTools?: string[];
+  deliverables?: string[];
 }
